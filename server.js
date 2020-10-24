@@ -68,6 +68,13 @@ app.get('/api/dashboard', jwtMW, (req, res) => {
     });
 });
 
+app.get('/api/settings', jwtMW, (req, res) => {
+    res.json({
+        success: true,
+        myContent: 'Secret Settings content for authenticated users only.'
+    });
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
