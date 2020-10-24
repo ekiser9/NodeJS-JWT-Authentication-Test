@@ -61,8 +61,28 @@
                 }
             }).then(res => {
                 if (res && res.data && res.data.success) {
+                    history.pushState({h1: 'Dashboard', m: res.data.myContent + '<br/><button onclick="getSettings()">Settings</button>'}, null, 'dashboard');
                     document.querySelector('h1.row').innerHTML = 'Dashboard';
                     document.querySelector('main').innerHTML = res.data.myContent + '<br/><button onclick="getSettings()">Settings</button>';
+
+                    addEventListener('popstate', function (e) {
+                        var h1 = e.originalEvent.state.h1;
+                        var m = e.originalEvent.state.m;
+                        //if (state !== null) {
+                        //    if (state.s == 'dashboard'){
+                        //        getDashboard();
+                        //    }
+                        //    else if (state.s == 'settings'){
+                        //        getSettings();
+                        //    }
+                        //    else {
+                        //        load('/');
+                        //    }
+                        //}
+                        //history.pushState({s: 'settings'}, null, 'settings');
+                        document.querySelector('h1.row').innerHTML = h1;
+                        document.querySelector('main').innerHTML = m;
+                    });
                 }
             });
         }
@@ -75,10 +95,34 @@
                 }
             }).then(res => {
                 if (res && res.data && res.data.success) {
+                    history.pushState({h1: 'Settings', m: res.data.myContent + '<br/><button onclick="getDashboard()">Get Dashboard</button>'}, null, 'settings');
                     document.querySelector('h1.row').innerHTML = 'Settings';
                     document.querySelector('main').innerHTML = res.data.myContent + '<br/><button onclick="getDashboard()">Get Dashboard</button>';
+
+                    addEventListener('popstate', function (e) {
+                        var h1 = e.originalEvent.state.h1;
+                        var m = e.originalEvent.state.m;
+                        //if (state !== null) {
+                        //    if (state.s == 'dashboard'){
+                        //        getDashboard();
+                        //    }
+                        //    else if (state.s == 'settings'){
+                        //        getSettings();
+                        //    }
+                        //    else {
+                        //        load('/');
+                        //    }
+                        //}
+                        //history.pushState({s: 'settings'}, null, 'settings');
+                        document.querySelector('h1.row').innerHTML = h1;
+                        document.querySelector('main').innerHTML = m;
+                    });
                 }
             });
+        }
+
+        function popstateListen() {
+            
         }
 
         function onLoad() {
